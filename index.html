@@ -34,29 +34,72 @@
 
   <body>
     <div id="page-loader">
-      <div class="splash-content">
-        <div class="splash-logo">🍽️</div>
-        <h1 class="splash-title">Mercy's Kitchen</h1>
-        <p class="splash-subtitle">Cooking the vibe</p>
-        <div class="loader-bar">
-          <div class="loader-progress"></div>
+      <div class="splash-bg-decor" id="splash-decor"></div>
+      
+      <div class="splash-container">
+        <div class="splash-visual">
+          <div class="splash-glow"></div>
+          <svg class="splash-icon-svg" viewBox="0 0 24 24">
+            <!-- Chef Hat Path -->
+            <path class="path-draw" d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z" />
+            <line class="path-draw" x1="6" y1="17" x2="18" y2="17" />
+          </svg>
+        </div>
+
+        <div class="splash-text-container">
+          <div class="splash-title-wrap" id="splash-title"></div>
+          <p class="splash-subtitle-reveal">Makurdi's Finest Cuisine</p>
+        </div>
+
+        <div class="progress-ring">
+          <svg viewBox="0 0 36 36">
+            <circle class="progress-ring-circle" cx="18" cy="18" r="16" />
+            <circle class="progress-ring-value" cx="18" cy="18" r="16" />
+          </svg>
         </div>
       </div>
     </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
-      // Splash Screen Controller
-      window.addEventListener('DOMContentLoaded', () => {
+      // Professional Splash Screen Logic
+      document.addEventListener('DOMContentLoaded', () => {
+        const titleContainer = document.getElementById('splash-title');
+        const decorContainer = document.getElementById('splash-decor');
+        const text = "Mercy's Kitchen";
+        
+        // Staggered Character Reveal
+        text.split('').forEach((char, i) => {
+          const span = document.createElement('span');
+          span.textContent = char === ' ' ? '\u00A0' : char;
+          span.className = 'splash-char';
+          span.style.animationDelay = `${i * 0.08 + 0.5}s`;
+          titleContainer.appendChild(span);
+        });
+
+        // Background Artistry - Floating Circles
+        for(let i = 0; i < 8; i++) {
+          const circle = document.createElement('div');
+          circle.className = 'decor-circle';
+          const size = Math.random() * 300 + 100;
+          circle.style.width = `${size}px`;
+          circle.style.height = `${size}px`;
+          circle.style.left = `${Math.random() * 100}%`;
+          circle.style.top = `${Math.random() * 100}%`;
+          circle.style.animationDelay = `${Math.random() * 5}s`;
+          circle.style.animationDuration = `${Math.random() * 10 + 15}s`;
+          decorContainer.appendChild(circle);
+        }
+
         const loader = document.getElementById('page-loader');
         
-        // Show splash for exactly 3 seconds then fade out
+        // Crazy 4-second animation sequence
         setTimeout(() => {
           loader.classList.add('fade-out');
           setTimeout(() => {
             loader.style.display = 'none';
-          }, 1000); // Wait for fade transition to finish
-        }, 3000);
+          }, 1200); // Wait for sophisticated clip-path transition
+        }, 4000);
       });
     </script>
   </body>

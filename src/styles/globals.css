@@ -51,96 +51,172 @@
   }
 }
 
-/* Splash Screen / Page Loader Styles */
+/* High-End Artistry Splash Screen Styles */
 #page-loader {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: #ffffff;
+  background: #0f172a; /* Deep elegant slate background */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
+  transition: clip-path 1.2s cubic-bezier(0.87, 0, 0.13, 1), opacity 0.8s ease;
   overflow: hidden;
+  clip-path: circle(150% at 50% 50%);
 }
 
 #page-loader.fade-out {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.splash-content {
-  text-align: center;
-  animation: splashIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  clip-path: circle(0% at 50% 50%);
   opacity: 0;
 }
 
-.splash-logo {
-  font-size: 5rem;
-  margin-bottom: 1.5rem;
-  display: inline-block;
-  animation: bounce 2s ease-in-out infinite;
-}
-
-.splash-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  font-weight: 800;
-  color: #e11d48;
-  margin: 0;
-  letter-spacing: -0.02em;
-  background: linear-gradient(to right, #e11d48, #fb7185);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.splash-subtitle {
-  font-family: sans-serif;
-  color: #64748b;
-  font-size: 1.1rem;
-  margin-top: 0.5rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-@keyframes splashIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.9) translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-15px); }
-}
-
-.loader-bar {
-  width: 200px;
-  height: 3px;
-  background: #f1f5f9;
-  margin-top: 2rem;
-  border-radius: 10px;
-  overflow: hidden;
+.splash-container {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
 }
 
-.loader-progress {
-  position: absolute;
-  top: 0;
-  left: 0;
+.splash-visual {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  margin-bottom: 2rem;
+}
+
+.splash-icon-svg {
+  width: 100%;
   height: 100%;
-  width: 0%;
-  background: #e11d48;
-  animation: progress 3s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+  fill: none;
+  stroke: #e11d48;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 12px rgba(225, 29, 72, 0.6));
 }
 
-@keyframes progress {
-  0% { width: 0%; }
-  100% { width: 100%; }
+.path-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawPath 2.5s cubic-bezier(0.45, 0, 0.55, 1) forwards;
+}
+
+@keyframes drawPath {
+  to { stroke-dashoffset: 0; }
+}
+
+.splash-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140%;
+  height: 140%;
+  background: radial-gradient(circle, rgba(225, 29, 72, 0.2) 0%, transparent 70%);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+}
+
+.splash-text-container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.splash-title-wrap {
+  display: flex;
+  gap: 0.2rem;
+}
+
+.splash-char {
+  display: inline-block;
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: #ffffff;
+  transform: translateY(100%);
+  animation: charReveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+@keyframes charReveal {
+  to { transform: translateY(0); }
+}
+
+.splash-subtitle-reveal {
+  margin-top: 0.75rem;
+  font-family: sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: #e11d48;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: subtitleReveal 1s ease-out 1.8s forwards;
+}
+
+@keyframes subtitleReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Sophisticated Progress Ring */
+.progress-ring {
+  position: absolute;
+  bottom: -60px;
+  width: 40px;
+  height: 40px;
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards 2s;
+}
+
+.progress-ring-circle {
+  fill: none;
+  stroke: rgba(255,255,255,0.1);
+  stroke-width: 2;
+}
+
+.progress-ring-value {
+  fill: none;
+  stroke: #e11d48;
+  stroke-width: 2;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  stroke-linecap: round;
+  animation: progressRing 4s linear forwards;
+}
+
+@keyframes progressRing {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+/* Background Artistry */
+.splash-bg-decor {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.decor-circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(225, 29, 72, 0.1);
+  animation: rotateDecor 20s linear infinite;
+}
+
+@keyframes rotateDecor {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

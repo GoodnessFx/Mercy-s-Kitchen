@@ -16,14 +16,15 @@ export const About: React.FC = () => {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="w-full"
           >
-            <div className="overflow-hidden rounded-2xl shadow-2xl border-4 border-white">
+            <div className="overflow-hidden rounded-2xl shadow-2xl border-4 border-white max-w-full">
               <img
                 src="/ceo.jpeg"
                 alt="Mercy Iyamah - CEO of Mercy's Kitchen"
@@ -33,10 +34,10 @@ export const About: React.FC = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex flex-col justify-center"
+            className="flex flex-col justify-center w-full"
           >
             <h2 className="mb-4 text-3xl font-bold text-foreground">Our Story</h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">

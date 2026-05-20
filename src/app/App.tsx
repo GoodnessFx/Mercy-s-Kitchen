@@ -27,7 +27,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <CartProvider>
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background overflow-x-hidden w-full relative">
           <Routes>
             {/* Public Routes with Navigation and Footer */}
             <Route element={

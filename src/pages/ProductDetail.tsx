@@ -81,15 +81,15 @@ export const ProductDetail: React.FC = () => {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
           >
-            <div className="sticky top-20">
-              <div className="overflow-hidden rounded-lg">
+            <div className="lg:sticky lg:top-24">
+              <div className="overflow-hidden rounded-lg shadow-lg">
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="h-[280px] w-full object-cover sm:h-[400px] lg:h-[500px]"
+                  className="h-[300px] w-full object-cover sm:h-[400px] lg:h-[500px]"
                 />
               </div>
               {item.bestseller && (
@@ -106,8 +106,9 @@ export const ProductDetail: React.FC = () => {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
           >
             <h1 className="mb-4 text-4xl font-bold text-foreground">{item.name}</h1>
             <p className="mb-6 text-lg text-muted-foreground">{item.description}</p>

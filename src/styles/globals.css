@@ -13,10 +13,14 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+    position: relative;
+    width: 100%;
   }
 
   /* Custom Cursor - Only on Desktop */

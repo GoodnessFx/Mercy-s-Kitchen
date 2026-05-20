@@ -67,15 +67,15 @@ export const AdminDashboard: React.FC = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 overflow-hidden">
         {/* Recent Orders Table */}
-        <div className="lg:col-span-2 overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+        <div className="lg:col-span-2 overflow-hidden rounded-xl border border-border bg-card shadow-sm w-full">
           <div className="flex items-center justify-between border-b border-border p-6">
             <h2 className="text-lg font-bold text-foreground">Recent Orders</h2>
             <button className="text-sm font-medium text-primary hover:underline">View All</button>
           </div>
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
+          <div className="overflow-x-auto w-full">
+            <table className="w-full text-left text-sm min-w-[600px] lg:min-w-full">
               <thead>
                 <tr className="bg-muted/50 border-b border-border">
                   <th className="px-6 py-3 font-semibold text-foreground">Order ID</th>

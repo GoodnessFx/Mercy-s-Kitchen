@@ -1,0 +1,422 @@
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router';
+import { motion } from 'motion/react';
+import { CheckCircle, Clock, Award, Truck, Star, ChevronRight } from 'lucide-react';
+import { Button } from '../components/Button';
+import { FoodCard } from '../components/FoodCard';
+import { WhatsAppLogo } from '../components/WhatsAppLogo';
+import { menuItems, eventTypes } from '../data/menuData';
+import { useCart } from '../context/CartContext';
+import { generateSingleItemMessage, openWhatsApp } from '../utils/whatsapp';
+import { MenuItem } from '../data/menuData';
+import * as Dialog from '@radix-ui/react-dialog';
+
+export const Home: React.FC = () => {
+  const navigate = useNavigate();
+  const { addToCart } = useCart();
+  const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
+  const [selectedPortion, setSelectedPortion] = useState<number>(0);
+  const [quantity, setQuantity] = useState(1);
+
+  const bestsellers = menuItems.filter((item) => item.bestseller);
+
+  const handleAddToCart = (item: MenuItem) => {
+    setSelectedItem(item);
+    setSelectedPortion(0);
+    setQuantity(1);
+  };
+
+  const confirmAddToCart = () => {
+    if (selectedItem) {
+      const portion = selectedItem.portions[selectedPortion];
+      addToCart({
+        id: selectedItem.id,
+        name: selectedItem.name,
+        portion: portion.name,
+        price: portion.price,
+        quantity,
+        image: selectedItem.image,
+      });
+      setSelectedItem(null);
+    }
+  };
+
+  const handleWhatsAppOrder = (item: MenuItem) => {
+    const portion = item.portions[0];
+    const message = generateSingleItemMessage(
+      item.name,
+      portion.name,
+      portion.price,
+      1
+    );
+    openWhatsApp(message);
+  };
+
+  const handleViewItem = (item: MenuItem) => {
+    navigate(`/menu/${item.id}`);
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-gradient-to-br from-primary/10 via-background to-secondary/10">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600')] bg-cover bg-center opacity-10" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 text-center sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-[#25D366]/20 bg-white/80 px-4 py-2 text-sm font-medium text-foreground shadow-sm backdrop-blur">
+              <WhatsAppLogo className="h-5 w-5" glow />
+              Fast WhatsApp ordering for Makurdi events and cravings
+            </div>
+            <h1 className="mb-6 text-4xl font-bold leading-tight text-foreground sm:text-5xl lg:text-6xl">
+              We Cook the Vibe.
+              <br />
+              <span className="text-primary">You Enjoy the Moment.</span>
+            </h1>
+            <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground sm:text-xl">
+              Premium catering and small chops for every occasion in Makurdi. Fresh, delicious, and delivered with love.
+            </p>
+            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={() => navigate('/menu')}
+              >
+                Order Now
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={() => navigate('/events')}
+              >
+                Browse Event Packages
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="overflow-hidden bg-primary py-3">
+        <motion.div
+          animate={{ x: [0, -1000] }}
+          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+            className="flex min-w-max whitespace-nowrap text-sm font-medium text-primary-foreground"
+        >
+          <span className="mx-8">🍢 SMALL CHOPS</span>
+          <span className="mx-8">🍚 JOLLOF RICE</span>
+          <span className="mx-8">🥤 CHAPMAN</span>
+          <span className="mx-8">🎉 EVENT PACKAGES</span>
+          <span className="mx-8">✦ FREE DELIVERY WITHIN MAKURDI ON BULK ORDERS ✦</span>
+          <span className="mx-8">✦ ORDER VIA WHATSAPP ✦</span>
+          <span className="mx-8">🍢 SMALL CHOPS</span>
+          <span className="mx-8">🍚 JOLLOF RICE</span>
+          <span className="mx-8">🥤 CHAPMAN</span>
+          <span className="mx-8">🎉 EVENT PACKAGES</span>
+        </motion.div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
+            Our Bestsellers
+          </h2>
+          <p className="text-lg text-muted-foreground">
+            Customer favorites that keep them coming back
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {bestsellers.map((item) => (
+            <FoodCard
+              key={item.id}
+              item={item}
+              onAddToCart={handleAddToCart}
+              onWhatsAppOrder={handleWhatsAppOrder}
+              onClick={handleViewItem}
+            />
+          ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <Button
+            variant="outline"
+            size="lg"
+            onClick={() => navigate('/menu')}
+          >
+            View Full Menu <ChevronRight className="ml-2 h-5 w-5" />
+          </Button>
+        </div>
+      </section>
+
+      <section className="bg-muted py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 text-center">
+            <h2 className="mb-2 text-2xl font-bold text-foreground sm:text-3xl">
+              Perfect for Every Occasion
+            </h2>
+          </div>
+          <div className="flex flex-wrap justify-center gap-3">
+            {eventTypes.map((type) => (
+              <Link
+                key={type}
+                to="/events"
+                className="rounded-full bg-card px-6 py-3 text-sm font-medium text-foreground shadow-sm transition-all hover:scale-105 hover:shadow-md"
+              >
+                {type}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="mb-12 text-center">
+          <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
+            How It Works
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-3xl">
+              1️⃣
+            </div>
+            <h3 className="mb-2 text-xl font-semibold">Choose Your Food</h3>
+            <p className="text-muted-foreground">
+              Browse our menu of delicious small chops, rice dishes, and drinks
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-3xl">
+              2️⃣
+            </div>
+            <h3 className="mb-2 text-xl font-semibold">Place Order via WhatsApp</h3>
+            <p className="text-muted-foreground">
+              One tap to send your order directly to Mercy on WhatsApp
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-center"
+          >
+            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-3xl">
+              3️⃣
+            </div>
+            <h3 className="mb-2 text-xl font-semibold">We Deliver to You</h3>
+            <p className="text-muted-foreground">
+              Fresh food delivered on time to your location in Makurdi
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      <section className="bg-muted py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
+              What Our Customers Say
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Trusted by hundreds of happy clients in Makurdi
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+            {[
+              {
+                name: 'Blessing A.',
+                text: "Mercy catered my daughter's naming ceremony and the food was fire! Everyone kept asking for her number.",
+                role: 'Mother',
+                image: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100'
+              },
+              {
+                name: 'Emeka J.',
+                text: "The best small chops in Makurdi, hands down. Fresh, hot, and delivered right on time for our office party.",
+                role: 'Business Owner',
+                image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100'
+              },
+              {
+                name: 'Terna S.',
+                text: "Her jollof rice is legendary. It has that authentic party taste that you can't find anywhere else.",
+                role: 'Event Planner',
+                image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100'
+              }
+            ].map((testimonial, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="rounded-2xl bg-card p-8 shadow-sm border border-border"
+              >
+                <div className="mb-4 flex gap-1 text-secondary">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-current" />
+                  ))}
+                </div>
+                <p className="mb-6 italic text-muted-foreground">"{testimonial.text}"</p>
+                <div className="flex items-center gap-4">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="h-12 w-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-bold text-foreground">{testimonial.name}</p>
+                    <p className="text-xs text-muted-foreground">{testimonial.role}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 text-center">
+        <div className="rounded-3xl bg-primary px-8 py-12 text-primary-foreground sm:px-16 sm:py-20">
+          <h2 className="mb-6 text-3xl font-bold sm:text-5xl">Ready to Eat?</h2>
+          <p className="mx-auto mb-10 max-w-2xl text-lg opacity-90 sm:text-xl">
+            Don't stay hungry. Order your favorite small chops or main meal now and have it delivered fresh to your door.
+          </p>
+          <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button
+              variant="secondary"
+              size="lg"
+              className="bg-white text-primary hover:bg-white/90"
+              onClick={() => navigate('/menu')}
+            >
+              Order Now
+            </Button>
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-white text-white hover:bg-white/10"
+              onClick={() => openWhatsApp('Hi Mercy! 👋 I want to place an order.')}
+            >
+              <WhatsAppLogo className="h-5 w-5" />
+              Chat on WhatsApp
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <Dialog.Root open={!!selectedItem} onOpenChange={() => setSelectedItem(null)}>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50" />
+          <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[90vh] w-[calc(100vw-1.5rem)] max-w-md -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-lg bg-card p-4 shadow-xl sm:w-full sm:p-6">
+            {selectedItem && (
+              <>
+                <Dialog.Title className="mb-4 text-2xl font-bold">
+                  Add to Cart
+                </Dialog.Title>
+                <div className="mb-4">
+                  <img
+                    src={selectedItem.image}
+                    alt={selectedItem.name}
+                    className="h-48 w-full rounded-lg object-cover"
+                  />
+                </div>
+                <h3 className="mb-2 text-xl font-semibold">{selectedItem.name}</h3>
+                <p className="mb-4 text-muted-foreground">{selectedItem.description}</p>
+
+                <div className="mb-4">
+                  <label className="mb-2 block text-sm font-medium">
+                    Select Portion/Package
+                  </label>
+                  <div className="space-y-2">
+                    {selectedItem.portions.map((portion, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setSelectedPortion(index)}
+                        className={`w-full rounded-lg border-2 p-3 text-left transition-all ${
+                          selectedPortion === index
+                            ? 'border-primary bg-primary/10'
+                            : 'border-border hover:border-primary/50'
+                        }`}
+                      >
+                        <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between">
+                          <span className="font-medium">{portion.name}</span>
+                          <span className="font-bold text-primary">
+                            ₦{portion.price.toLocaleString()}
+                          </span>
+                        </div>
+                        {portion.serves && (
+                          <p className="mt-1 text-xs text-muted-foreground">
+                            Serves {portion.serves}
+                          </p>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mb-6">
+                  <label className="mb-2 block text-sm font-medium">Quantity</label>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                      className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-border font-bold hover:border-primary"
+                    >
+                      -
+                    </button>
+                    <span className="min-w-[3rem] text-center text-xl font-bold">
+                      {quantity}
+                    </span>
+                    <button
+                      onClick={() => setQuantity(quantity + 1)}
+                      className="flex h-10 w-10 items-center justify-center rounded-lg border-2 border-border font-bold hover:border-primary"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+
+                <div className="mb-4 rounded-lg bg-muted p-3">
+                  <div className="flex items-center justify-between text-lg font-bold">
+                    <span>Total:</span>
+                    <span className="text-primary">
+                      ₦{(selectedItem.portions[selectedPortion].price * quantity).toLocaleString()}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Button
+                    variant="outline"
+                    fullWidth
+                    onClick={() => setSelectedItem(null)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button variant="primary" fullWidth onClick={confirmAddToCart}>
+                    Add to Cart
+                  </Button>
+                </div>
+              </>
+            )}
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    </div>
+  );
+};

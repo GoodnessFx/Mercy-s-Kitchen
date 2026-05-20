@@ -34,23 +34,29 @@
 
   <body>
     <div id="page-loader">
-      <div class="loader-logo" style="text-align: center;">
-        <div style="font-size: 4rem;">🍽️</div>
-        <h1 style="font-family: sans-serif; font-weight: bold; margin-top: 1rem; color: #e11d48;">Mercy's Kitchen</h1>
-        <p style="font-family: sans-serif; color: #64748b;">Cooking the vibe...</p>
+      <div class="splash-content">
+        <div class="splash-logo">🍽️</div>
+        <h1 class="splash-title">Mercy's Kitchen</h1>
+        <p class="splash-subtitle">Cooking the vibe</p>
+        <div class="loader-bar">
+          <div class="loader-progress"></div>
+        </div>
       </div>
     </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
     <script>
-      window.addEventListener('load', () => {
+      // Splash Screen Controller
+      window.addEventListener('DOMContentLoaded', () => {
         const loader = document.getElementById('page-loader');
+        
+        // Show splash for exactly 3 seconds then fade out
         setTimeout(() => {
-          loader.classList.add('hidden');
+          loader.classList.add('fade-out');
           setTimeout(() => {
             loader.style.display = 'none';
-          }, 500);
-        }, 1000);
+          }, 1000); // Wait for fade transition to finish
+        }, 3000);
       });
     </script>
   </body>

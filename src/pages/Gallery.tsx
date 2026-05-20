@@ -155,7 +155,7 @@ export const Gallery: React.FC = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.9, opacity: 0 }}
                 className="max-w-5xl overflow-hidden rounded-2xl bg-card shadow-2xl"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e: React.MouseEvent) => e.stopPropagation()}
               >
                 <div className="flex flex-col lg:flex-row">
                   <div className="lg:w-2/3">

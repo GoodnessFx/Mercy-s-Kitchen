@@ -27,7 +27,7 @@ export const AdminDashboard: React.FC = () => {
     { id: '#M-4517', customer: 'Grace Emmanuel', items: 'Wedding Package B', status: 'Completed', total: '₦125,000', time: '3 hours ago' },
   ];
 
-  const getStatusColor = (status: string) => {
+  const getStatusColor = (status: string): string => {
     switch (status) {
       case 'Pending': return 'bg-yellow-100 text-yellow-700 border-yellow-200';
       case 'Cooking': return 'bg-blue-100 text-blue-700 border-blue-200';

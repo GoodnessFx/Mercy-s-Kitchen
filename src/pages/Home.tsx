@@ -19,6 +19,8 @@ const HERO_IMAGES = [
   'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1600', // Chapman
   'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=1600', // Zobo
   'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=1600', // Peppered Chicken
+  'https://images.unsplash.com/photo-1567070506502-fa9602fa92f7?w=1600', // Platter
+  'https://images.unsplash.com/photo-1541544741938-0af808871cc0?w=1600', // Fresh Grill
 ];
 
 export const Home: React.FC = () => {
@@ -87,7 +89,7 @@ export const Home: React.FC = () => {
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 0.6, scale: 1 }}
               exit={{ opacity: 0, scale: 1.05 }}
-              transition={{ duration: 2.5, ease: "easeInOut" }}
+              transition={{ duration: 2.0, ease: "easeInOut" }}
               className="h-full w-full object-cover"
             />
           </AnimatePresence>
@@ -116,15 +118,21 @@ export const Home: React.FC = () => {
               <Button
                 variant="primary"
                 size="lg"
-                className="px-10 py-4 text-lg font-bold shadow-lg shadow-primary/20"
+                className="group relative overflow-hidden px-10 py-4 text-lg font-bold shadow-lg shadow-primary/20"
                 onClick={() => navigate('/menu')}
               >
-                Order Now
+                <span className="relative z-10">Order Now</span>
+                <motion.div 
+                  className="absolute inset-0 bg-white/20"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '100%' }}
+                  transition={{ duration: 0.5 }}
+                />
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="border-white/30 px-10 py-4 text-lg font-bold text-white hover:bg-white hover:text-black"
+                className="border-white/30 px-10 py-4 text-lg font-bold text-white hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
                 onClick={() => navigate('/events')}
               >
                 Browse Event Packages

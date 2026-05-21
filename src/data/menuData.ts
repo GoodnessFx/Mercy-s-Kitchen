@@ -27,7 +27,7 @@ export const menuItems: MenuItem[] = [
     description: 'Fluffy golden-fried sweet dough balls, perfect for any occasion',
     price: 50,
     priceUnit: 'per piece',
-    image: 'https://images.unsplash.com/photo-1619419383046-b1e0b4b8d56e?w=800',
+    image: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=800',
     portions: [
       { name: 'Per Piece', price: 50 },
       { name: 'Per Tray (50 pieces)', price: 2000, serves: '10-15 people' },
@@ -86,7 +86,7 @@ export const menuItems: MenuItem[] = [
     description: 'Spicy gizzard with sweet plantain in rich pepper sauce',
     price: 200,
     priceUnit: 'per serving',
-    image: 'https://images.unsplash.com/photo-1604329758728-f43c45dddd2e?w=800',
+    image: 'https://images.unsplash.com/photo-1595030334552-6f71e2c7f4b8?w=800',
     portions: [
       { name: 'Per Serving', price: 200 },
       { name: 'Per Tray (30 servings)', price: 5500, serves: '8-10 people' },

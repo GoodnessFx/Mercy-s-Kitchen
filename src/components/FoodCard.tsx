@@ -76,30 +76,30 @@ export const FoodCard: React.FC<FoodCardProps> = ({
           )}
         </div>
 
-        <div className="flex flex-col gap-2 sm:flex-row">
+        <div className="flex items-center gap-2">
           <Button
             variant="primary"
             size="sm"
-            fullWidth
+            className="flex-1 whitespace-nowrap px-2 sm:px-4"
             onClick={(e) => {
               e.stopPropagation();
               onAddToCart(item);
             }}
           >
-            <ShoppingCart className="mr-1 h-4 w-4" />
-            Add to Cart
+            <ShoppingCart className="mr-1 h-3.5 w-3.5 sm:h-4 sm:w-4" />
+            <span className="text-xs sm:text-sm">Add to Cart</span>
           </Button>
           <Button
             variant="whatsapp"
             size="sm"
-            fullWidth
+            className="flex-1 whitespace-nowrap px-2 sm:px-4"
             onClick={(e) => {
               e.stopPropagation();
               onWhatsAppOrder(item);
             }}
           >
-            <WhatsAppLogo className="h-4 w-4 mr-1.5" glow />
-            Order
+            <WhatsAppLogo className="mr-1 h-3.5 w-3.5 sm:h-4 sm:w-4" glow />
+            <span className="text-xs sm:text-sm">Order</span>
           </Button>
         </div>
       </div>

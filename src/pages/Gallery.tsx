@@ -43,7 +43,7 @@ const galleryImages = [
   },
   {
     id: 6,
-    url: 'https://images.unsplash.com/photo-1604329758728-f43c45dddd2e?w=800',
+    url: 'https://images.unsplash.com/photo-1595030334552-6f71e2c7f4b8?w=800',
     title: 'Gizdodo Platter',
     category: 'Small Chops',
     description: 'The perfect combination of gizzard and plantain.'
@@ -57,7 +57,7 @@ const galleryImages = [
   },
   {
     id: 8,
-    url: 'https://images.unsplash.com/photo-1619419383046-b1e0b4b8d56e?w=800',
+    url: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=800', // Puff Puff (Working image)
     title: 'Fluffy Puff Puff',
     category: 'Small Chops',
     description: 'The ultimate Nigerian party snack.'

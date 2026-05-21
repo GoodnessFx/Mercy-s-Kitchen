@@ -13,7 +13,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 
 const HERO_IMAGES = [
   'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600', // Party Jollof
-  'https://images.unsplash.com/photo-1604329758728-f43c45dddd2e?w=1600', // Gizdodo
+  'https://images.unsplash.com/photo-1595030334552-6f71e2c7f4b8?w=1600', // Gizdodo (New working image)
   'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1600', // Samosas
   'https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=1600', // Wedding Rice
   'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1600', // Chapman

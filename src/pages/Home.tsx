@@ -32,7 +32,7 @@ export const Home: React.FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 5000);
+    }, 9000);
     return () => clearInterval(timer);
   }, []);
 

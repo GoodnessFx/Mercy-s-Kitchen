@@ -58,30 +58,40 @@ export const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
-      <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-gradient-to-br from-primary/10 via-background to-secondary/10">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600')] bg-cover bg-center opacity-10" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 text-center sm:px-6 lg:px-8">
+      <section className="relative flex min-h-[90vh] items-center overflow-hidden bg-[#0a0a0a]">
+        {/* Background Image with sophisticated overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600" 
+            alt="Hero Background" 
+            className="h-full w-full object-cover opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="max-w-2xl text-left"
           >
-            <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-[#25D366]/20 bg-white/80 px-4 py-2 text-sm font-medium text-foreground shadow-sm backdrop-blur">
-              <WhatsAppLogo className="h-5 w-5" glow />
-              Fast WhatsApp ordering for Makurdi events and cravings
-            </div>
-            <h1 className="mb-6 text-4xl font-bold leading-tight text-foreground sm:text-5xl lg:text-6xl">
-              We Cook the Vibe.
-              <br />
-              <span className="text-primary">You Enjoy the Moment.</span>
+            <h1 className="mb-6 text-5xl font-bold leading-tight text-white sm:text-6xl lg:text-7xl">
+              <span className="block font-sans">We Cook the Vibe.</span>
+              <span className="mt-2 block font-serif italic text-secondary">
+                You Enjoy the Moment.
+              </span>
             </h1>
-            <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground sm:text-xl">
-              Premium catering and small chops for every occasion in Makurdi. Fresh, delicious, and delivered with love.
+            
+            <p className="mb-10 max-w-lg text-lg text-gray-300 sm:text-xl">
+              Premium catering and artisanal small chops for Makurdi's most memorable moments. Freshly crafted, delivered with love.
             </p>
-            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+
+            <div className="flex flex-col gap-4 sm:flex-row">
               <Button
                 variant="primary"
                 size="lg"
+                className="px-10 py-4 text-lg font-bold shadow-lg shadow-primary/20"
                 onClick={() => navigate('/menu')}
               >
                 Order Now
@@ -89,6 +99,7 @@ export const Home: React.FC = () => {
               <Button
                 variant="outline"
                 size="lg"
+                className="border-white/30 px-10 py-4 text-lg font-bold text-white hover:bg-white hover:text-black"
                 onClick={() => navigate('/events')}
               >
                 Browse Event Packages

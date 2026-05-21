@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { CheckCircle, Clock, Award, Truck, Star, ChevronRight } from 'lucide-react';
 import { Button } from '../components/Button';
 import { FoodCard } from '../components/FoodCard';
@@ -11,12 +11,26 @@ import { generateSingleItemMessage, openWhatsApp } from '../utils/whatsapp';
 import { MenuItem } from '../data/menuData';
 import * as Dialog from '@radix-ui/react-dialog';
 
+const HERO_IMAGES = [
+  'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600', // Party Jollof
+  'https://images.unsplash.com/photo-1604329758728-f43c45dddd2e?w=1600', // Gizdodo
+  'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1600', // Samosas
+];
+
 export const Home: React.FC = () => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const [selectedItem, setSelectedItem] = useState<MenuItem | null>(null);
   const [selectedPortion, setSelectedPortion] = useState<number>(0);
   const [quantity, setQuantity] = useState(1);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   const bestsellers = menuItems.filter((item) => item.bestseller);
 
@@ -59,14 +73,21 @@ export const Home: React.FC = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <section className="relative flex min-h-[90vh] items-center overflow-hidden bg-[#0a0a0a]">
-        {/* Background Image with sophisticated overlay */}
+        {/* Background Image Carousel with sophisticated overlay */}
         <div className="absolute inset-0 z-0">
-          <img 
-            src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600" 
-            alt="Hero Background" 
-            className="h-full w-full object-cover opacity-85"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={currentImageIndex}
+              src={HERO_IMAGES[currentImageIndex]}
+              alt="Hero Background"
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 0.6, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 1.5, ease: "easeInOut" }}
+              className="h-full w-full object-cover"
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">

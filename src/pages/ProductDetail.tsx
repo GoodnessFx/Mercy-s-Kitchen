@@ -216,7 +216,7 @@ export const ProductDetail: React.FC = () => {
                 Add to Cart
               </Button>
               <Button variant="whatsapp" size="lg" fullWidth onClick={handleWhatsAppOrder}>
-                <WhatsAppLogo className="h-5 w-5" glow />
+                <WhatsAppLogo className="h-5 w-5 mr-2" glow />
                 Order via WhatsApp
               </Button>
             </div>

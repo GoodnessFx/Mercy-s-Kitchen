@@ -178,7 +178,7 @@ export const Gallery: React.FC = () => {
                         fullWidth
                         onClick={() => openWhatsApp(`Hi Mercy! 👋 I saw the photo of "${selectedImage.title}" in your gallery and I'd like to order something similar.`)}
                       >
-                        <WhatsAppLogo className="h-5 w-5" />
+                        <WhatsAppLogo className="h-5 w-5 mr-2" glow />
                         Order This Item
                       </Button>
                       <Button

@@ -95,7 +95,7 @@ export const Events: React.FC = () => {
                     fullWidth
                     onClick={() => handleInquiry(pkg.name, pkg.serves, pkg.price)}
                   >
-                    <WhatsAppLogo className="h-5 w-5" glow />
+                    <WhatsAppLogo className="h-5 w-5 mr-2" glow />
                     Inquire via WhatsApp
                   </Button>
                   <Button

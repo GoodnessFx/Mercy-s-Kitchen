@@ -92,15 +92,14 @@ export const FoodCard: React.FC<FoodCardProps> = ({
           <Button
             variant="whatsapp"
             size="sm"
+            fullWidth
             onClick={(e) => {
               e.stopPropagation();
               onWhatsAppOrder(item);
             }}
-            className="shrink-0 sm:w-auto"
-            aria-label={`Order ${item.name} on WhatsApp`}
           >
-            <WhatsAppLogo className="h-4 w-4" />
-            <span className="sm:hidden">WhatsApp</span>
+            <WhatsAppLogo className="h-4 w-4 mr-1.5" glow />
+            Order
           </Button>
         </div>
       </div>

@@ -53,6 +53,15 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+  @keyframes whatsappGlow {
+    0%, 100% { box-shadow: 0 0 20px rgba(37, 211, 102, 0.6); transform: scale(1); }
+    50% { box-shadow: 0 0 35px rgba(37, 211, 102, 0.85); transform: scale(1.05); }
+  }
+
+  .animate-whatsapp-glow {
+    animation: whatsappGlow 2s ease-in-out infinite;
+  }
 }
 
 /* High-End Artistry Splash Screen Styles */

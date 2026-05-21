@@ -81,7 +81,7 @@ Please get back to me. Thank you! 🙏`;
 
               <div className="flex items-start gap-4">
                 <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366]/10">
-                  <WhatsAppLogo className="h-6 w-6" />
+                  <WhatsAppLogo className="h-6 w-6" glow />
                 </div>
                 <div>
                   <h3 className="mb-1 font-semibold text-foreground">WhatsApp</h3>
@@ -95,7 +95,7 @@ Please get back to me. Thank you! 🙏`;
                       openWhatsApp("Hi Mercy! 👋 I'd like to place a food order!")
                     }
                   >
-                    <WhatsAppLogo className="h-4 w-4" />
+                    <WhatsAppLogo className="h-4 w-4 mr-2" glow />
                     Chat on WhatsApp
                   </Button>
                 </div>

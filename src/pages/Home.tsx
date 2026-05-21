@@ -15,6 +15,10 @@ const HERO_IMAGES = [
   'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600', // Party Jollof
   'https://images.unsplash.com/photo-1604329758728-f43c45dddd2e?w=1600', // Gizdodo
   'https://images.unsplash.com/photo-1601050690597-df0568f70950?w=1600', // Samosas
+  'https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=1600', // Wedding Rice
+  'https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=1600', // Chapman
+  'https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?w=1600', // Zobo
+  'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=1600', // Peppered Chicken
 ];
 
 export const Home: React.FC = () => {
@@ -28,7 +32,7 @@ export const Home: React.FC = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % HERO_IMAGES.length);
-    }, 3000);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
@@ -82,8 +86,8 @@ export const Home: React.FC = () => {
               alt="Hero Background"
               initial={{ opacity: 0, scale: 1.1 }}
               animate={{ opacity: 0.6, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 1.5, ease: "easeInOut" }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 2.5, ease: "easeInOut" }}
               className="h-full w-full object-cover"
             />
           </AnimatePresence>

@@ -64,9 +64,9 @@ export const Home: React.FC = () => {
           <img 
             src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600" 
             alt="Hero Background" 
-            className="h-full w-full object-cover opacity-60"
+            className="h-full w-full object-cover opacity-85"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/80 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/60 to-transparent" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">

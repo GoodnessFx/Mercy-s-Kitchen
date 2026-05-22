@@ -3,9 +3,6 @@
 
 Mercy's Kitchen is a Vite + React food ordering and catering site built for a Makurdi-based kitchen brand. It focuses on fast WhatsApp ordering, event package inquiries, cart-based ordering, and a warm food-first presentation across desktop and mobile.
 
-Original design source:
-[Figma file](https://www.figma.com/design/w8BtFCVenfU8nOYuI4dm8Z/Mercys-Kitchen)
-
 ## What This Project Includes
 
 - Responsive landing page with featured items and event highlights
